@@ -36,14 +36,13 @@
         var markers = locations.map(function(location, i) {
           return new google.maps.Marker({
             position: {lat: location.lat, lng: location.lng},
-            icon: 'http://labs.google.com/ridefinder/images/mm_20_gray.png',
-            map: map
+            icon: 'http://labs.google.com/ridefinder/images/mm_20_gray.png'
           });
         });
 
         // Add a marker clusterer to manage the markers.
-        //var markerCluster = new MarkerClusterer(map, markers,
-        //    {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
+        var markerCluster = new MarkerClusterer(map, markers,
+            {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
       }
       var locations = [
       { lat: 39.7143523 , lng: -104.9783376 },
@@ -4757,10 +4756,8 @@
       { lat: 39.0040849 , lng: -77.1361576 }
     ]
     </script>
-    <!--
     <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js">
     </script>
-    -->
     <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAWeH1XifAZZzWMIsL2B3aIS45M15-IjOo&callback=initMap">
     </script>
