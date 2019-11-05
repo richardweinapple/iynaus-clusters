@@ -36,7 +36,8 @@
         var markers = locations.map(function(location, i) {
           return new google.maps.Marker({
             position: {lat: location.lat, lng: location.lng},
-            icon: 'http://labs.google.com/ridefinder/images/mm_20_gray.png'
+            icon: 'http://labs.google.com/ridefinder/images/mm_20_gray.png',
+            map: map
           });
         });
 
