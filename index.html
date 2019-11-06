@@ -22,23 +22,32 @@
     <div id="map"></div>
     <script>
       var regions = {
-        'IMIYA'  : { label: 'A' },
-        'IYACSR' : { label: 'R' },
-        'IYAGNY' : { label: 'N' },
-        'IYALA'  : { label: 'L' },
-        'IYAMW'  : { label: 'M' },
-        'IYANC'  : { label: 'C' },
-        'IYANE'  : { label: 'E' },
-        'IYANW'  : { label: 'W' },
-        'IYASCUS': { label: 'U' },
-        'IYASE'  : { label: 'S' },
-        'IYASW'  : { label: 'Q' },
-        'IYAUM'  : { label: 'Z' },
-        'IYNAUS' : { label: 'X' }
+        'IMIYA'  : { label: 'A', icon: 'gray' },
+        'IYACSR' : { label: 'R', icon: 'green' },
+        'IYAGNY' : { label: 'N', icon: 'orange' },
+        'IYALA'  : { label: 'L', icon: 'purple' },
+        'IYAMW'  : { label: 'M', icon: 'red' },
+        'IYANC'  : { label: 'C', icon: 'white' },
+        'IYANE'  : { label: 'E', icon: 'yellow' },
+        'IYANW'  : { label: 'W', icon: 'black' },
+        'IYASCUS': { label: 'U', icon: 'blue' },
+        'IYASE'  : { label: 'S', icon: 'brown' },
+        'IYASW'  : { label: 'Q', icon: 'gray' },
+        'IYAUM'  : { label: 'Z', icon: 'green' },
+        'IYNAUS' : { label: 'X', icon: 'orange' }
       }
-      
-      function regLabel(location) {
+
+      function locPosition(location) {
+        return { lat: location.lat, lng: location.lng }
+      }
+
+      function locLabel(location) {
         return regions[location.reg].label
+      }
+
+      function locIcon(location) {
+        var icon = regions[location.reg].icon
+        return 'http://labs.google.com/ridefinder/images/mm_20_'+icon+'.png'
       }
 
       function initMap() {
@@ -53,9 +62,9 @@
         // The map() method here has nothing to do with the Google Maps API.
         var markers = locations.map(function(location, i) {
           return new google.maps.Marker({
-            position: {lat: location.lat, lng: location.lng},
-            icon: 'http://labs.google.com/ridefinder/images/mm_20_red.png',
-            label: regLabel(location)
+            position: locPosition(location),
+            icon    : locIcon(location),
+            label   : locLabel(location)
           });
         });
 
