@@ -24,35 +24,33 @@
     <div id="map"></div>
     <script>
       var regions = {
-        'IMIYA'  : { label: 'A', iconColor: 'red' },
-        'IYACSR' : { label: 'R', iconColor: 'black' },
-        'IYAGNY' : { label: 'N', iconColor: 'blue' },
-        'IYALA'  : { label: 'L', iconColor: 'green' },
-        'IYAMW'  : { label: 'M', iconColor: 'grey' },
-        'IYANC'  : { label: 'C', iconColor: 'orange' },
-        'IYANE'  : { label: 'E', iconColor: 'purple' },
-        'IYANW'  : { label: 'W', iconColor: 'white' },
-        'IYASCUS': { label: 'U', iconColor: 'yellow' },
-        'IYASE'  : { label: 'S', iconColor: 'red+' },
-        'IYASW'  : { label: 'Q', iconColor: 'black+' },
-        'IYAUM'  : { label: 'Z', iconColor: 'blue+' },
-        'IYNAUS' : { label: 'X', iconColor: 'green+' }
+        'IMIYA'  : { label: 'A', iconName: 'red' },
+        'IYACSR' : { label: 'R', iconName: 'black' },
+        'IYAGNY' : { label: 'N', iconName: 'blue' },
+        'IYALA'  : { label: 'L', iconName: 'green' },
+        'IYAMW'  : { label: 'M', iconName: 'grey' },
+        'IYANC'  : { label: 'C', iconName: 'orange' },
+        'IYANE'  : { label: 'E', iconName: 'purple' },
+        'IYANW'  : { label: 'W', iconName: 'white' },
+        'IYASCUS': { label: 'U', iconName: 'yellow' },
+        'IYASE'  : { label: 'S', iconName: 'red+' },
+        'IYASW'  : { label: 'Q', iconName: 'black+' },
+        'IYAUM'  : { label: 'Z', iconName: 'blue+' },
+        'IYNAUS' : { label: 'X', iconName: 'green+' }
       }
 
-      function positionMember(member) {
+      function memberPosition(member) {
         return { lat: member.lat, lng: member.lng }
       }
 
-      function labelMember(member) {
+      function memberLabel(member) {
         //return regions[member.region].label
         return ''
       }
 
-      function iconMember(member) {
-        var iconColor = regions[member.region].iconColor
-        //return 'http://labs.google.com/ridefinder/images/mm_20_'+icon+'.png'
-        //return 'http://google.com/mapfiles/ms/micons/'+icon+'.png'
-        return 'https://raw.githubusercontent.com/Concept211/Google-Maps-Markers/master/images/marker_'+iconColor+'.png'
+      function memberIcon(member) {
+        var iconName = regions[member.region].iconName
+        return 'https://raw.githubusercontent.com/Concept211/Google-Maps-Markers/master/images/marker_'+iconName+'.png'
       }
 
       function initMap() {
@@ -67,16 +65,772 @@
         // The map() method here has nothing to do with the Google Maps API.
         var markersMembers = members.map(function(member, i) {
           return new google.maps.Marker({
-            position: positionMember(member),
-            icon    : iconMember(member),
-            label   : labelMember(member)
+            position: memberPosition(member),
+            icon    : memberIcon(member),
+            label   : memberLabel(member)
           });
         });
 
         // Add a marker clusterer to manage the markers.
         var markerClustererMembers = new MarkerClusterer(map, markersMembers,
             {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
+
+        var markersStudios = studios.map(function(studio, i) {
+          return new google.maps.Marker({
+            position: studioPosition(studio)
+          });
+        });
+
+        var markerClustererStuidos = new MarkerClusterer(map, markersStudios,
+            {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
       }
+
+      var studios = [
+        {
+          name: 'Altadena Yoga',
+          lat: 34.2103962,
+          lng: -118.1239717,
+          address: '',
+          city: 'Altadena',
+          state: 'CA',
+          country: 'US',
+          phone: '626-399-3865',
+          contact: '',
+          web: ''
+        },
+        {
+          name: 'Ann Arbor School of Yoga',
+          lat: 42.2818127,
+          lng: -83.7531542,
+          address: '420 W Huron St',
+          city: 'Ann Arbor',
+          state: 'MI',
+          country: 'US',
+          phone: '734-663-7612',
+          contact: 'info@annarborschoolofyoga.com',
+          web: 'http://www.annarborschoolofyoga.com'
+        },
+        {
+          name: 'Austin Iyengar Yoga',
+          lat: 30.237863,
+          lng: -97.7932088,
+          address: '4006 S Lamar Blvd',
+          city: 'Austin',
+          state: 'TX',
+          country: 'US',
+          phone: '(512) 923-4643',
+          contact: '',
+          web: 'http://www.austiniyengaryoga.org/'
+        },
+        {
+          name: 'BKS Iyengar Yoga Center of Las Vegas',
+          lat: 36.1450196,
+          lng: -115.2321729,
+          address: '6342 W Sahara Ave',
+          city: 'Las Vegas',
+          state: 'NV',
+          country: 'US',
+          phone: '702-222-9642',
+          contact: 'aileen@iyclv.com',
+          web: 'http://www.iyclv.com'
+        },
+        {
+          name: 'BKS Iyengar Yoga Center of Minneapolis',
+          lat: 44.9526786,
+          lng: -93.2885062,
+          address: '2736 Lyndale Ave S',
+          city: 'Minneapolis',
+          state: 'MN',
+          country: 'US',
+          phone: '612-872-8708',
+          contact: 'iyengaryogampls@yahoo.com',
+          web: 'http://www.iyengaryogampls.com'
+        },
+        {
+          name: 'BKS Iyengar Yoga Center of the Willamette Valley',
+          lat: 44.5707142,
+          lng: -123.2670249,
+          address: '511 NW 11th St',
+          city: 'Corvallis',
+          state: 'OR',
+          country: 'US',
+          phone: '541-752-3268',
+          contact: 'patanjalayogstucen@hotmail.com',
+          web: 'http://www.iywv.org'
+        },
+        {
+          name: 'BKS Iyengar Yoga Centers of San Diego',
+          lat: 32.7461232,
+          lng: -117.2482985,
+          address: '4869 Santa Monica Ave',
+          city: 'San Diego',
+          state: 'CA',
+          country: 'US',
+          phone: '619-226-2202',
+          contact: 'info@sandiegoyoga.com',
+          web: 'http://www.sandiegoyoga.com'
+        },
+        {
+          name: 'BKS Iyengar Yoga Institute of La Mesa',
+          lat: 32.7646587,
+          lng: -117.0191773,
+          address: '8285 La Mesa Blvd',
+          city: 'La Mesa',
+          state: 'CA',
+          country: 'US',
+          phone: '619-871-8380',
+          contact: 'yogagold2@gmail.com',
+          web: 'http://IyengarYogaLaMesa.com'
+        },
+        {
+          name: 'BKS Iyengar Yoga Institute of Los Angeles',
+          lat: 34.0434891,
+          lng: -118.3793976,
+          address: '1835 S La Cienega Blvd',
+          city: 'Los Angeles',
+          state: 'CA',
+          country: 'US',
+          phone: '310-558-8212',
+          contact: 'institute@iyila.org',
+          web: 'http://iyila.org/'
+        },
+        {
+          name: 'BKS Iyengar Yoga School of Central Philadelphia',
+          lat: 39.9614415,
+          lng: -75.1931542,
+          address: '3505 Barring St',
+          city: 'Philadelphia',
+          state: 'PA',
+          country: 'US',
+          phone: '215-386-9228',
+          contact: 'joan@joanwhite.us',
+          web: 'http://www.joanwhiteyoga.com'
+        },
+        {
+          name: 'BKS Iyengar Yoga Studio of Dallas',
+          lat: 32.8434334,
+          lng: -96.7731204,
+          address: '5539 Dyer St',
+          city: 'Dallas',
+          state: 'TX',
+          country: 'US',
+          phone: '214-365-9642',
+          contact: 'BKS-info@tx.rr.com',
+          web: 'http://dallasiyengaryoga.com/'
+        },
+        {
+          name: 'BKS Iyengar Yoga Studio of Tucson',
+          lat: 32.2356406,
+          lng: -110.9202616,
+          address: '3400 E Speedway',
+          city: 'Tucson',
+          state: 'AZ',
+          country: 'US',
+          phone: '520-743-7142',
+          contact: 'iyengartucson@yahoo.com',
+          web: 'http://www.iyengartucson.com'
+        },
+        {
+          name: 'Beth O\'Hara Iyengar Yoga',
+          lat: 39.1245853,
+          lng: -84.5101241,
+          address: '114 Wellington Place',
+          city: 'Cincinnati',
+          state: 'OH',
+          country: 'US',
+          phone: '513-621-3600',
+          contact: '',
+          web: 'http://www.goconscious.com/home/iyengar_yoga.html'
+        },
+        {
+          name: 'Brookline Iyengar Yoga Studio',
+          lat: 42.3350885,
+          lng: -71.1269107,
+          address: '24 Somerset Rd',
+          city: 'Brookline',
+          state: 'MA',
+          country: 'US',
+          phone: '',
+          contact: 'dr.manju.vachher@gmail.com',
+          web: 'http://www.brooklineyogastudio.com'
+        },
+        {
+          name: 'Centre de Yoga Iyengar de Montmartre',
+          lat: 48.8927657,
+          lng: 2.3404026,
+          address: '16 rue des Cloys',
+          city: 'Paris',
+          state: 'Ile de France',
+          country: 'France',
+          phone: '33684922270',
+          contact: 'sophboller@mac.com',
+          web: 'http://www.YogaMontmartre.fr'
+        },
+        {
+          name: 'Great White Heron Iyengar Yoga',
+          lat: 29.9474051,
+          lng: -90.130039,
+          address: '1138 S Carrollton Ave',
+          city: 'New Orleans',
+          state: 'LA',
+          country: 'US',
+          phone: '504-331-0177',
+          contact: 'sharon@greatwhiteheron.net',
+          web: 'http://greatwhiteheron.net'
+        },
+        {
+          name: 'Houston Iyengar Yoga Studio',
+          lat: 29.7299154,
+          lng: -95.3869615,
+          address: '4916 Main St',
+          city: 'Houston',
+          state: 'TX',
+          country: 'US',
+          phone: '713-527-9100',
+          contact: 'constancebraden@mac.com',
+          web: 'http://www.houstoniyengaryoga.com/'
+        },
+        {
+          name: 'Iyengar Center Ft Collins',
+          lat: 40.5858686,
+          lng: -105.0749512,
+          address: '210 East Oak Suite A',
+          city: 'Ft Collins',
+          state: 'CO',
+          country: 'US',
+          phone: '970-231-0496',
+          contact: 'cwrightyoga@fastmail.fm',
+          web: 'http://cwrightyoga.com'
+        },
+        {
+          name: 'Iyengar Institute of Pittsburgh',
+          lat: 40.4599442,
+          lng: -79.9243086,
+          address: '6016 Centre Ave',
+          city: 'Pittsburgh',
+          state: 'PA',
+          country: 'US',
+          phone: '412-363-9642',
+          contact: 'Iyengaryogapgh@gmail.com',
+          web: 'http://Iyengaryogapittsburgh.org'
+        },
+        {
+          name: 'Iyengar Yoga Center of Boise',
+          lat: 43.6288793,
+          lng: -116.1995562,
+          address: '1512 N 10th St',
+          city: 'Boise',
+          state: 'ID',
+          country: 'US',
+          phone: '208-917-8297',
+          contact: 'info@iyengaryogaboise.com',
+          web: 'http://www.iyengaryogaboise.com'
+        },
+        {
+          name: 'Iyengar Yoga Center of Boulder',
+          lat: 40.0211438,
+          lng: -105.2659919,
+          address: '2299 Pearl St',
+          city: 'Boulder',
+          state: 'CO',
+          country: 'US',
+          phone: '303-444-9642',
+          contact: 'laura@boulderyoga.com',
+          web: 'http://www.boulderyoga.com/'
+        },
+        {
+          name: 'Iyengar Yoga Center of Denver',
+          lat: 39.7026178,
+          lng: -104.9871239,
+          address: '770 S Broadway St',
+          city: 'Denver',
+          state: 'CO',
+          country: 'US',
+          phone: '720-570-9642',
+          contact: 'info@iyengaryogacenter.com',
+          web: 'http://www.iyengaryogacenter.com'
+        },
+        {
+          name: 'Iyengar Yoga Center of Grand Rapids',
+          lat: 42.9572232,
+          lng: -85.6680705,
+          address: '327 S Division Ave',
+          city: 'Grand Rapids',
+          state: 'MI',
+          country: 'US',
+          phone: '616-915-1277',
+          contact: 'jennifer@iycgr.com',
+          web: 'http://www.iycgr.com'
+        },
+        {
+          name: 'Iyengar Yoga Center of Maine',
+          lat: 44.38971,
+          lng: -68.755231,
+          address: '1499 Coastal Rd',
+          city: 'Brooksville',
+          state: 'ME',
+          country: 'US',
+          phone: '207-326-2037',
+          contact: 'info@iyengaryogamaine.com',
+          web: 'http://iyengaryogamaine.com'
+        },
+        {
+          name: 'Iyengar Yoga Center of Ojai',
+          lat: 34.4485845,
+          lng: -119.2432244,
+          address: '109B N Montgomery St',
+          city: 'Ojai',
+          state: 'CA',
+          country: 'US',
+          phone: '8058897320',
+          contact: 'iyengar.ojai@gmail.com',
+          web: 'http://www.iyengaryogaojai.com'
+        },
+        {
+          name: 'Iyengar Yoga Center of Orange County',
+          lat: 36.0288776,
+          lng: -79.0146495,
+          address: '3717 Murphy School Road',
+          city: 'Durham',
+          state: 'NC',
+          country: 'US',
+          phone: '919-360-9529',
+          contact: 'Helen@iyengaryogaoc.com',
+          web: 'https://www.vagaro.com/iyengaryogacenteroforangecountyllc'
+        },
+        {
+          name: 'Iyengar Yoga Center of Raleigh',
+          lat: 35.7795663,
+          lng: -78.6486059,
+          address: '613B W Morgan St',
+          city: 'Raleigh',
+          state: 'NC',
+          country: 'US',
+          phone: '(919) 609-2456',
+          contact: 'INFO@IYENGARRALEIGH.COM',
+          web: 'http://www.iyengarraleigh.com/'
+        },
+        {
+          name: 'The Iyengar Yoga Center of the Lehigh Valley',
+          lat: 40.6194972,
+          lng: -75.3749656,
+          address: '424 Center Street',
+          city: 'Bethlehem',
+          state: 'PA',
+          country: 'US',
+          phone: '12152009727',
+          contact: 'holly@yogawithholly.com',
+          web: 'http://www.iyengaryogalehighvalley.com'
+        },
+        {
+          name: 'Iyengar Yoga Center of the Palm Beaches',
+          lat: 26.510573,
+          lng: -80.137566,
+          address: '11161 Green Lake Dr',
+          city: 'Boynton Beach,',
+          state: 'FL',
+          country: 'US',
+          phone: '954-562-5645',
+          contact: 'floatingyoga108@mac.com',
+          web: 'http://www.iycpb.com'
+        },
+        {
+          name: 'Iyengar Yoga Center of Vermont',
+          lat: 44.487699,
+          lng: -73.2074336,
+          address: '294 N Winooski Ave',
+          city: 'Burlington',
+          state: 'VT',
+          country: 'US',
+          phone: '973-229-9784',
+          contact: 'rebecca@iycvt.com',
+          web: 'http://www.iycvt.com'
+        },
+        {
+          name: 'Iyengar Yoga Champaign-Urbana',
+          lat: 40.1120541,
+          lng: -88.2126785,
+          address: '407 W Springfield Ave',
+          city: 'Urbana',
+          state: 'IL',
+          country: 'US',
+          phone: '217-344-9642',
+          contact: 'info@yoga-cu.com',
+          web: 'http://www.yoga-cu.com'
+        },
+        {
+          name: 'Iyengar Yoga Charleston',
+          lat: 32.8116192,
+          lng: -79.8776884,
+          address: '716 S Shelmore Blvd',
+          city: 'Mount Pleasant',
+          state: 'SC',
+          country: 'US',
+          phone: '843.990.0212',
+          contact: 'debra@iyengaryogacharleston.com',
+          web: 'http://www.iyengaryogacharleston.com'
+        },
+        {
+          name: 'Iyengar Yoga Detroit',
+          lat: 42.3982704,
+          lng: -83.0644818,
+          address: '2321 Caniff Ave',
+          city: 'Hamtramck',
+          state: 'MI',
+          country: 'US',
+          phone: '313-528-9493',
+          contact: 'infoatiydc@gmail.com',
+          web: 'http://iyengaryogadetroit.com'
+        },
+        {
+          name: 'Iyengar Yoga Encinitas',
+          lat: 33.0383511,
+          lng: -117.2400239,
+          address: '2210 Encinitas Blvd',
+          city: 'Encinitas',
+          state: 'CA',
+          country: 'US',
+          phone: '760-632-0040',
+          contact: '',
+          web: 'https://iyengaryogaencinitas.com/'
+        },
+        {
+          name: 'Iyengar Yoga Hawaii',
+          lat: 19.725238,
+          lng: -155.086221,
+          address: '190 Kamehameha Ave',
+          city: 'Hilo',
+          state: 'HI',
+          country: 'US',
+          phone: '808-430-1752',
+          contact: 'iyengaryogahi@gmail.com',
+          web: 'http://iyengaryogahi.com'
+        },
+        {
+          name: 'Iyengar Yoga Honolulu',
+          lat: 21.3077184,
+          lng: -157.8102941,
+          address: '2752 Woodlawn Dr',
+          city: 'Honolulu',
+          state: 'HI',
+          country: 'US',
+          phone: '808-386-9374',
+          contact: '',
+          web: 'https://honoluluyoga.com'
+        },
+        {
+          name: 'Iyengar Yoga Institute of Brooklyn',
+          lat: 40.6845945,
+          lng: -73.9804575,
+          address: '525 Pacific St',
+          city: 'Brooklyn',
+          state: 'NY',
+          country: 'US',
+          phone: '718-875-7300',
+          contact: 'info@iyengarnyc.org',
+          web: 'http://www.iyengarnyc.org'
+        },
+        {
+          name: 'Iyengar Yoga Institute of New York',
+          lat: 40.7429222,
+          lng: -73.9953607,
+          address: '150 W 22nd St',
+          city: 'New York',
+          state: 'NY',
+          country: 'US',
+          phone: '212-691-9642',
+          contact: 'info@iyengarnyc.org',
+          web: 'http://www.iyengarnyc.org'
+        },
+        {
+          name: 'Iyengar Yoga Institute of Pittsburgh',
+          lat: 40.4282156,
+          lng: -79.9246224,
+          address: '2721 Murray Avenue',
+          city: 'Pittsburgh',
+          state: 'PA',
+          country: 'US',
+          phone: '412-422-9642',
+          contact: 'IyengarYogaPgh@gmail.com',
+          web: 'http://iyengaryogapittsburgh.org'
+        },
+        {
+          name: 'Iyengar Yoga Institute of San Francisco',
+          lat: 37.7854849,
+          lng: -122.4367709,
+          address: '2201 Sutter St',
+          city: 'San Francisco',
+          state: 'CA',
+          country: 'US',
+          phone: '415-753-0909',
+          contact: 'info@iyisf.org',
+          web: 'http://www.iyisf.org'
+        },
+        {
+          name: 'Iyengar Yoga Maui',
+          lat: 20.9159528,
+          lng: -156.3800246,
+          address: '24 Luna Ln',
+          city: 'Paia',
+          state: 'HI',
+          country: 'US',
+          phone: '917-816-4647',
+          contact: 'lee@iyengaryogamaui.com',
+          web: 'http://www.IyengaryogaMaui.com'
+        },
+        {
+          name: 'Iyengar Yoga Napa Valley',
+          lat: 38.494656,
+          lng: -122.4595728,
+          address: '1350 Community Dr',
+          city: 'St Helena',
+          state: 'CA',
+          country: 'US',
+          phone: '707 3378719',
+          contact: 'jaki@iynv.com',
+          web: 'http://Iynv.com'
+        },
+        {
+          name: 'Iyengar Yoga Ocean Beach (OBYoga)',
+          lat: 32.7409701,
+          lng: -117.245221,
+          address: '1807 Froude St',
+          city: 'San Diego',
+          state: 'CA',
+          country: 'US',
+          phone: '619-980-2111',
+          contact: 'chere@obyoga.com',
+          web: 'http://obyoga.com'
+        },
+        {
+          name: 'Iyengar Yoga of Adams County',
+          lat: 39.9772075,
+          lng: -77.2251183,
+          address: '',
+          city: 'Aspers',
+          state: 'PA',
+          country: 'US',
+          phone: '',
+          contact: 'orchardiyengar@gmail.com',
+          web: 'http://www.orchardiyengar.com'
+        },
+        {
+          name: 'Iyengar Yoga of Bend',
+          lat: 44.0573376,
+          lng: -121.3014742,
+          address: '660 NE 3rd St',
+          city: 'Bend',
+          state: 'OR',
+          country: 'US',
+          phone: '541-318-1186',
+          contact: '',
+          web: 'https://yogaofbend.com'
+        },
+        {
+          name: 'Iyengar Yoga of Charlottesville',
+          lat: 38.0410604,
+          lng: -78.4781984,
+          address: '1717-2A Allied St',
+          city: 'Charlottesville',
+          state: 'VA',
+          country: 'US',
+          phone: '434-260-3449',
+          contact: 'asana@iyengarcville.com',
+          web: 'https://iyengarcville.com'
+        },
+        {
+          name: 'Iyengar Yoga of Huntington Beach',
+          lat: 33.7126664,
+          lng: -118.0511527,
+          address: '17170 Courtney Ln',
+          city: 'Huntington Beach',
+          state: 'CA',
+          country: 'US',
+          phone: '714-235-8380',
+          contact: 'suzyogahb@gmail.com',
+          web: 'http://www.yogahb.com'
+        },
+        {
+          name: 'Iyengar Yoga Sarasota',
+          lat: 27.339242,
+          lng: -82.5342571,
+          address: '312 N Osprey Ave',
+          city: 'Sarasota',
+          state: 'FL',
+          country: 'US',
+          phone: '941-363-1085',
+          contact: '',
+          web: 'http://www.iyengaryogasarasota.com'
+        },
+        {
+          name: 'Iyengar Yoga Source',
+          lat: 41.8174667,
+          lng: -71.4277449,
+          address: '1155 Westminster Street',
+          city: 'Providence',
+          state: 'RI',
+          country: 'US',
+          phone: '401-461-6665',
+          contact: 'k.swanson@cox.net',
+          web: 'http://www.iyengaryogasource.com'
+        },
+        {
+          name: 'Iyengar Yoga South Bay',
+          lat: 37.2876411,
+          lng: -121.9515949,
+          address: '1 W Campbell Ave',
+          city: 'Campbell',
+          state: 'CA',
+          country: 'US',
+          phone: '408-644-1368',
+          contact: 'lbon@iyoga.com',
+          web: 'http://www.iyoga.com/'
+        },
+        {
+          name: 'Iyengar Yoga St Pete',
+          lat: 27.7705339,
+          lng: -82.7260609,
+          address: '6480 Central Ave',
+          city: 'St Petersburg',
+          state: 'FL',
+          country: 'US',
+          phone: '727 914-3015',
+          contact: 'iyengarstpete@gmail.com',
+          web: 'http://www.iy-sp.com'
+        },
+        {
+          name: 'Iyengar Yoga Studio of Santa Barbara',
+          lat: 34.4361158,
+          lng: -119.7254333,
+          address: '2718 De La Vina St',
+          city: 'Santa Barbara',
+          state: 'CA',
+          country: 'US',
+          phone: '805-680-2864',
+          contact: 'richem@cox.net',
+          web: 'http://iyssb.com'
+        },
+        {
+          name: 'Iyengar Yogshala',
+          lat: 37.371859,
+          lng: -122.0212337,
+          address: '',
+          city: 'Sunnyvale',
+          state: 'CA',
+          country: 'US',
+          phone: '',
+          contact: 'yogshala@gmail.com',
+          web: ''
+        },
+        {
+          name: 'iYoga Delray Beach',
+          lat: 26.4707858,
+          lng: -80.0915944,
+          address: '601 N Congress Ave',
+          city: 'Delray Beach',
+          state: 'FL',
+          country: 'US',
+          phone: '954-254-5172',
+          contact: 'info@iyogadelraybeach.com',
+          web: 'http://iyogadelraybeach.com/'
+        },
+        {
+          name: 'Miami Beach Iyengar Yoga Center',
+          lat: 25.8552266,
+          lng: -80.1319062,
+          address: '1218 Normandy Dr',
+          city: 'Miami Beach',
+          state: 'FL',
+          country: 'US',
+          phone: '305-484-0656',
+          contact: 'mbiyengar@gmail.com',
+          web: 'http://mbiyengar.com'
+        },
+        {
+          name: 'Phoenix Iyengar Yoga',
+          lat: 39.9545628,
+          lng: -75.1668505,
+          address: '1600 Arch St',
+          city: 'Philadelphia',
+          state: 'PA',
+          country: 'US',
+          phone: '',
+          contact: 'frumaadina@aol.com',
+          web: 'http://www.adinaghen.com'
+        },
+        {
+          name: 'Postures',
+          lat: 26.2448015,
+          lng: -81.8115051,
+          address: '',
+          city: 'Naples',
+          state: 'FL',
+          country: 'US',
+          phone: '239-566-9642',
+          contact: '',
+          web: 'http://www.postures.com'
+        },
+        {
+          name: 'San Angelo Iyengar Community Yoga',
+          lat: 31.4299093,
+          lng: -100.3733264,
+          address: '3336 W Loop 306',
+          city: 'San Angelo',
+          state: 'TX',
+          country: 'US',
+          phone: '325-947-2582',
+          contact: 'yogajerri@gmail.com',
+          web: ''
+        },
+        {
+          name: 'Seattle Iyengar Yoga Studio',
+          lat: 47.6668864,
+          lng: -122.3850366,
+          address: '5307 22nd Avenue NW, Suite E',
+          city: 'Seattle',
+          state: 'WA',
+p          country: 'US',
+          phone: '206-402-6006',
+          contact: 'shaw@seattleiyengaryoga.com',
+          web: 'http://www.seattleiyengaryoga.com'
+        },
+        {
+          name: 'Tree House Iyengar Yoga',
+          lat: 47.7742429,
+          lng: -122.3096109,
+          address: '20011 Ballinger Way NE',
+          city: 'Shoreline',
+          state: 'WA',
+          country: 'US',
+          phone: '206-361-9642',
+          contact: 'info@thiyoga.com',
+          web: 'https://thiyoga.com/'
+        },
+        {
+          name: 'Yoga Iyengar Style by Donna Pointer & Associates',
+          lat: 42.2789329,
+          lng: -83.7908759,
+          address: '310 Gralake Ave',
+          city: 'Ann Arbor',
+          state: 'MI',
+          country: 'US',
+          phone: '734-662-5026',
+          contact: 'yogadonnap@mac.com',
+          web: ''
+        },
+        {
+          name: 'Yoga with Xinzhen - Iyengar Durham',
+          lat: 35.9657059,
+          lng: -78.8042828,
+          address: '',
+          city: 'Durham',
+          state: 'NC',
+          country: 'US',
+          phone: '9198183172',
+          contact: 'xinzhenw@gmail.com',
+          web: 'https://www.facebook.com/iyengaryogadurham/'
+        }
+      ]
 
       var members = [
          { region: 'IMIYA', lat: 39.7143523 , lng: -104.9783376 },
