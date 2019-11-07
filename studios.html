@@ -41,6 +41,10 @@
             {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
       }
 
+      google.maps.event.addListener(marker, 'click', function(event) {
+        alert(event);
+      });
+
       var studios = [
         {
           name: 'Altadena Yoga',
