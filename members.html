@@ -63,9 +63,7 @@
 
         var markersMembers = members.map(function(member, i) {
           return new google.maps.Marker({
-            position: memberPosition(member),
-            icon    : memberIcon(member),
-            label   : memberLabel(member)
+            position: memberPosition(member)
           });
         });
 
