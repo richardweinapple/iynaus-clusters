@@ -53,6 +53,10 @@
         return 'https://raw.githubusercontent.com/Concept211/Google-Maps-Markers/master/images/marker_'+iconName+'.png'
       }
 
+      function studioPosition(studio) {
+        return { lat: studio.lat, lng: studio.lng }
+      }
+
       function initMap() {
         var map = new google.maps.Map(document.getElementById('map'), {
           zoom: 4,
@@ -63,17 +67,17 @@
         // Note: The code uses the JavaScript Array.prototype.map() method to
         // create an array of markers based on a given "locations" array.
         // The map() method here has nothing to do with the Google Maps API.
-//        var markersMembers = members.map(function(member, i) {
-//          return new google.maps.Marker({
-//            position: memberPosition(member),
-//            icon    : memberIcon(member),
-//            label   : memberLabel(member)
-//          });
-//        });
+        var markersMembers = members.map(function(member, i) {
+          return new google.maps.Marker({
+            position: memberPosition(member),
+            icon    : memberIcon(member),
+            label   : memberLabel(member)
+          });
+        });
 
         // Add a marker clusterer to manage the markers.
-//        var markerClustererMembers = new MarkerClusterer(map, markersMembers,
-//            {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
+        var markerClustererMembers = new MarkerClusterer(map, markersMembers,
+            {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
 
         var markersStudios = studios.map(function(studio, i) {
           return new google.maps.Marker({
