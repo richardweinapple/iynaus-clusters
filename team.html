@@ -24,9 +24,11 @@
         for (var member in members) {
            lat = lat + member.lat
            lng = lng + member.lng
+           console.log(lat,lng)
         }
         lat = lat / members.length
         lng = lng / members.length
+        console.log(lat,lng)
 
         var map = new google.maps.Map(document.getElementById('map'), {
           zoom: 10,
