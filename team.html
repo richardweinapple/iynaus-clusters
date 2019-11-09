@@ -27,7 +27,8 @@
         var markers = members.map(function(member, i) {
           return new google.maps.Marker({
             map: map,
-            position: { lat: member.lat, lng: member.lng }
+            position: { lat: member.lat, lng: member.lng },
+            icon: { url: "http://maps.google.com/mapfiles/ms/icons/'+member.color+'-dot.png" }
           });
         });
 
@@ -37,12 +38,12 @@
       }
 
       var members = [
-         { name: "Kane", lat: 37.4620487, lng: -122.2479073 },
-         { name: "Baker", lat: 37.552109, lng: -122.2544788 },
-         { name: "Bodas", lat: 37.5303649, lng: -122.5151965 },
-         { name: "Devlin", lat: 37.9479786, lng: -122.0607963 },
-         { name: "Weinapple", lat: 37.4733015, lng: -122.1916106 },
-         { name: "average", lat: 37.5932, lng: -122.254 }
+         { name: "Kane", lat: 37.4620487, lng: -122.2479073, color: "blue" },
+         { name: "Baker", lat: 37.552109, lng: -122.2544788, color: "blue" },
+         { name: "Bodas", lat: 37.5303649, lng: -122.5151965, color: "blue" },
+         { name: "Devlin", lat: 37.9479786, lng: -122.0607963, color: "blue" },
+         { name: "Weinapple", lat: 37.4733015, lng: -122.1916106, color: "blue" },
+         { name: "average", lat: 37.5932, lng: -122.254, color: "red" }
       ]
     </script>
     <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js">
