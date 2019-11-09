@@ -21,14 +21,15 @@
       function initMap() {
         var lat = 0.0
         var lng = 0.0
-        for (var member in members) {
-           console.log(member)
-           lat = lat + member.lat
-           lng = lng + member.lng
-           console.log(lat,lng)
+        var i = 0
+        var n = members.length
+        while (i <= n) {
+           lat = lat + member[i].lat
+           lng = lng + member[i].lng
+           ++i
         }
-        lat = lat / members.length
-        lng = lng / members.length
+        lat = lat / n
+        lng = lng / n
         console.log(lat,lng)
 
         var map = new google.maps.Map(document.getElementById('map'), {
