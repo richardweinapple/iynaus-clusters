@@ -54,15 +54,19 @@
           });
         });
 
-        $("#map .marker").on('click', function(event){
-          event.stopPropagation();
-          event.stopImmediatePropagation();
-          console.log(event.target)
-        });
+        //$("#map .marker").on('click', function(event){
+        //  event.stopPropagation();
+        //  event.stopImmediatePropagation();
+        //  console.log(event.target)
+        //});
 
         //$(document).on('click', '#map .marker', function (event) {
         //  infowindow.open(map, event.target);
         //});
+
+        $(document).on('click', '.marker', function (event) {
+          console.log("Hello, world!")
+        });
       }
     </script>
 
