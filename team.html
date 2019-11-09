@@ -8,10 +8,7 @@
     <meta charset="utf-8">
     <title>Team Members</title>
     <style>
-      #map {
-        height: 100%;
-      }
-      html, body {
+      html, body, #map {
         height: 100%;
         margin: 0;
         padding: 0;
@@ -24,11 +21,12 @@
       function initMap() {
         var map = new google.maps.Map(document.getElementById('map'), {
           zoom: 10,
-          center: {lat: 37.5932, lng: -122.254}
+          center: { lat: 37.5932, lng: -122.254 }
         });
 
         var markers = members.map(function(member, i) {
           return new google.maps.Marker({
+            map: map,
             position: { lat: member.lat, lng: member.lng }
           });
         });
