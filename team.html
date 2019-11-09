@@ -19,11 +19,11 @@
     <div id="map"></div>
     <script>
       var members = [
-         { name: "Kane", lat: 37.4620487, lng: -122.2479073, color: "blue" },
-         { name: "Baker", lat: 37.552109, lng: -122.2544788, color: "blue" },
-         { name: "Bodas", lat: 37.5303649, lng: -122.5151965, color: "blue" },
-         { name: "Devlin", lat: 37.9479786, lng: -122.0607963, color: "blue" },
-         { name: "Weinapple", lat: 37.4733015, lng: -122.1916106, color: "blue" }
+        { name: "Kane", lat: 37.4620487, lng: -122.2479073, color: "blue" },
+        { name: "Baker", lat: 37.552109, lng: -122.2544788, color: "blue" },
+        { name: "Bodas", lat: 37.5303649, lng: -122.5151965, color: "blue" },
+        { name: "Devlin", lat: 37.9479786, lng: -122.0607963, color: "blue" },
+        { name: "Weinapple", lat: 37.4733015, lng: -122.1916106, color: "blue" }
       ]
 
       function initMap() {
@@ -32,9 +32,9 @@
         var i = 0
         var n = members.length
         while (i < n) {
-           lat = lat + members[i].lat
-           lng = lng + members[i].lng
-           ++i
+          lat = lat + members[i].lat
+          lng = lng + members[i].lng
+          i = i + 1
         }
         lat = lat / n
         lng = lng / n
@@ -53,11 +53,12 @@
             icon: { url: "http://maps.google.com/mapfiles/ms/icons/"+member.color+"-dot.png" }
           });
         });
+      }
     </script>
     <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js">
     </script>
     <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAWeH1XifAZZzWMIsL2B3aIS45M15-IjOo&callback=initMap">
+       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAWeH1XifAZZzWMIsL2B3aIS45M15-IjOo&callback=initMap">
     </script>
   </body>
 </html>
