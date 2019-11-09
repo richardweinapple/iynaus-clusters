@@ -6,14 +6,11 @@
     <meta http-equiv="Expires" content="0" />
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
-    <title>IYNAUS Members</title>
+    <title>Team Members</title>
     <style>
-      /* Always set the map height explicitly to define the size of the div
-       * element that contains the map. */
       #map {
         height: 100%;
       }
-      /* Optional: Makes the sample page fill the window. */
       html, body {
         height: 100%;
         margin: 0;
@@ -24,33 +21,29 @@
   <body>
     <div id="map"></div>
     <script>
-      function memberPosition(member) {
-        return { lat: member.lat, lng: member.lng }
-      }
-
       function initMap() {
         var map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 4,
-          center: {lat: 39, lng: -95}
+          zoom: 6,
+          center: {lat: 37.5932, lng: -122.254}
         });
 
-        var markersMembers = members.map(function(member, i) {
+        var markers = members.map(function(member, i) {
           return new google.maps.Marker({
-            position: memberPosition(member)
+            position: { lat: member.lat, lng: member.lng }
           });
         });
 
-        var markerClustererMembers = new MarkerClusterer(map, markersMembers,
+        var markerClusterer = new MarkerClusterer(map, markers,,
             {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
       }
 
       var members = [
-         { "name": "Kane", "lat" : 37.4620487, "lng" : -122.2479073 },
-         { "name": "Baker", "lat" : 37.552109, "lng" : -122.2544788 },
-         { "name": "Bodas", "lat" : 37.5303649, "lng" : -122.5151965 },
-         { "name": "Devlin", "lat" : 37.9479786, "lng" : -122.0607963 },
-         { "name": "Weinapple", "lat" : 37.4733015, "lng" : -122.1916106 },
-         { "name": "average","lat" :37.5932, "lng" : -122.254 }
+         { name: "Kane", lat: 37.4620487, lng: -122.2479073 },
+         { name: "Baker", lat: 37.552109, lng: -122.2544788 },
+         { name: "Bodas", lat: 37.5303649, lng: -122.5151965 },
+         { name: "Devlin", lat: 37.9479786, lng: -122.0607963 },
+         { name: "Weinapple", lat: 37.4733015, lng: -122.1916106 },
+         { name: "average", lat: 37.5932, lng: -122.254 }
       ]
     </script>
     <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js">
