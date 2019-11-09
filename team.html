@@ -19,8 +19,14 @@
     <div id="map"></div>
     <script>
       function initMap() {
-        lat = float(sum(member.lat for member in members)) / len(members)
-        lng = float(sum(member.lng for member in members)) / len(members)
+        var lat = 0.0
+        var lng = 0.0
+        for member in members {
+           lat = lat + member.lat
+           lng = lng + member.lng
+        }
+        lat = lat / members.length
+        lng = lng / members.length
 
         var map = new google.maps.Map(document.getElementById('map'), {
           zoom: 10,
